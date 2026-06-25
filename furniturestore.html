@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VÉLOUR | Avant-Garde Premium Living</title>
+    <style>
+      :root {
+        --bg-light: #f6f6f9;
+        --text-dark: #0f0f11;
+        --text-secondary: #575762;
+        --accent-orange: #ff4522;
+        --card-base: #ffffff;
+        --border-thin: #e2e2e8;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        overflow-x: hidden;
+      }
+
+      /* Structural Header Layout */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2.5rem 8%;
+        background: rgba(246, 246, 249, 0.9);
+        backdrop-filter: blur(15px);
+        position: sticky;
+        top: 0;
+        z-index: 900;
+        border-b: 1px solid var(--border-thin);
+      }
+      .brand {
+        font-size: 2rem;
+        font-weight: 900;
+        letter-spacing: -1.5px;
+        cursor: pointer;
+      }
+      .brand span {
+        color: var(--accent-orange);
+      }
+
+      .nav-categories {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-categories li {
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        color: var(--text-secondary);
+        transition: color 0.2s;
+      }
+      .nav-categories li.active-tab {
+        color: var(--text-dark);
+        border-bottom: 2px solid var(--text-dark);
+      }
+      .nav-categories li:hover {
+        color: var(--text-dark);
+      }
+
+      .cart-status {
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 0.6rem 1.4rem;
+        border: 2px solid var(--text-dark);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .cart-status:hover {
+        background: var(--text-dark);
+        color: white;
+      }
+
+      /* Bold Hero Banner */
+      .hero-intro {
+        padding: 6rem 8% 4rem;
+        max-w: 900px;
+      }
+      .hero-intro h1 {
+        font-size: 5.5rem;
+        font-weight: 800;
+        tracking: -3px;
+        line-height: 0.95;
+        margin-bottom: 2rem;
+      }
+      .hero-intro h1 em {
+        font-style: italic;
+        font-weight: 300;
+        color: var(--text-secondary);
+      }
+      .hero-intro p {
+        color: var(--text-secondary);
+        font-size: 1.3rem;
+        font-weight: 400;
+        line-height: 1.6;
+      }
+
+      /* Product Collection Grid */
+      .collection-container {
+        padding: 2rem 8% 8rem;
+      }
+      .grid-layout {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+      }
+
+      .product-card {
+        background: var(--card-base);
+        border-radius: 24px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--border-thin);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        border-color: var(--text-dark);
+      }
+
+      .img-box {
+        width: 100%;
+        height: 260px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+      .img-box img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        transition: transform 0.4s ease;
+      }
+      .product-card:hover .img-box img {
+        transform: scale(1.05);
+      }
+
+      .details-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .title-txt {
+        font-weight: 700;
+        font-size: 1.2rem;
+        letter-spacing: -0.5px;
+      }
+      .cat-txt {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+      }
+      .price-txt {
+        font-weight: 800;
+        color: var(--text-dark);
+        font-size: 1.1rem;
+      }
+
+      .bag-action-btn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--text-dark);
+        color: white;
+        border: none;
+        font-size: 1.4rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .product-card:hover .bag-action-btn {
+        background: var(--accent-orange);
+        transform: rotate(90deg);
+      }
+
+      /* Immersive Lookbook Strip */
+      .lookbook-banner {
+        background: var(--text-dark);
+        color: white;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 4rem 0 8rem;
+        align-items: center;
+        min-height: 500px;
+      }
+      .lookbook-info {
+        flex: 1;
+        min-width: 320px;
+        padding: 4rem 8%;
+      }
+      .lookbook-info h3 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+      }
+      .lookbook-info p {
+        color: #a2a2ad;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+      .lookbook-media {
+        flex: 1.2;
+        min-width: 350px;
+        height: 500px;
+        background: url("https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1000&q=80")
+          center/cover;
+      }
+
+      /* Slide-out Checkout Drawer */
+      .cart-drawer {
+        position: fixed;
+        top: 0;
+        right: -450px;
+        width: 450px;
+        height: 100vh;
+        background: white;
+        border-left: 1px solid var(--border-thin);
+        z-index: 2000;
+        box-shadow: -20px 0 60px rgba(0, 0, 0, 0.1);
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .cart-drawer.open {
+        right: 0;
+      }
+      .drawer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border-thin);
+        padding-bottom: 1.5rem;
+      }
+      .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      .cart-items-list {
+        flex-grow: 1;
+        margin: 2rem 0;
+        overflow-y: auto;
+        list-style: none;
+      }
+      .cart-item-node {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+        border-bottom: 1px solid #f0f0f5;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .checkout-footer h4 {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+      }
+      .pay-btn {
+        width: 100%;
+        background: var(--text-dark);
+        color: white;
+        padding: 1.2rem;
+        border: none;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        text-transform: uppercase;
+      }
+      .pay-btn:hover {
+        background: var(--accent-orange);
+      }
+
+      .toast-popup {
+        position: fixed;
+        bottom: 2rem;
+        left: 2rem;
+        background: var(--text-dark);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        font-weight: 600;
+        z-index: 3000;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+      .toast-popup.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">VÉLOUR<span>.</span></div>
+      <ul class="nav-categories">
+        <li class="active-tab" onclick="filterCategory('all', this)">
+          All Collections
+        </li>
+        <li onclick="filterCategory('seating', this)">Seating</li>
+        <li onclick="filterCategory('lighting', this)">Lighting</li>
+      </ul>
+      <div class="cart-status" onclick="toggleCart(true)">
+        Bag (<span id="cartCount">0</span>)
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-intro">
+        <h1>Structural Mastery, <br /><em>Sculpted Comfort.</em></h1>
+        <p>
+          A high-contrast index of avant-garde visual elements structured
+          cleanly to honor elite structural architectural functionality.
+        </p>
+      </section>
+
+      <section class="collection-container">
+        <div class="grid-layout" id="storeGrid">
+          <!-- Injected cleanly by dynamic loop engine -->
+        </div>
+      </section>
+
+      <section class="lookbook-banner">
+        <div class="lookbook-info">
+          <h3>The 2026 Nordic Brutalist Lookbook</h3>
+          <p>
+            Explore raw sculptural spatial layouts configured perfectly with
+            warm organic linen textures and sand-cast aluminum hardware.
+          </p>
+          <button
+            class="pay-btn"
+            style="
+              background: white;
+              color: var(--text-dark);
+              width: auto;
+              padding: 1rem 2rem;
+            "
+          >
+            Acquire Brochure
+          </button>
+        </div>
+        <div class="lookbook-media"></div>
+      </section>
+    </main>
+
+    <!-- Sidebar Cart View Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="drawer-header">
+        <h2>Your Collection</h2>
+        <button class="close-btn" onclick="toggleCart(false)">&times;</button>
+      </div>
+      <ul class="cart-items-list" id="cartItemsList">
+        <!-- Injected nodes -->
+      </ul>
+      <div class="checkout-footer">
+        <h4><span>Total Valuation</span> <span id="cartTotal">$0</span></h4>
+        <button class="pay-btn" onclick="processCheckout()">
+          Secure Transaction
+        </button>
+      </div>
+    </div>
+
+    <div class="toast-popup" id="toast">
+      Added component selection to your collection
+    </div>
+
+    <script>
+      const PRODUCTS = [
+        {
+          id: 1,
+          name: "Bouclé Arc Lounge",
+          category: "seating",
+          price: 1850,
+          img: "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=400&q=80",
+        },
+        {
+          id: 2,
+          name: "Ochre Minimalist Throne",
+          category: "seating",
+          price: 1200,
+          img: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=400&q=80",
+        },
+        {
+          id: 3,
+          name: "Monolithic Concrete Block Chair",
+          category: "seating",
+          price: 2400,
+          img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=400&q=80",
+        },
+        {
+          id: 4,
+          name: "Orbital Trajectory Pendant",
+          category: "lighting",
+          price: 950,
+          img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=400&q=80",
+        },
+        {
+          id: 5,
+          name: "Brutalist Raw Iron Sconce",
+          category: "lighting",
+          price: 680,
+          img: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=400&q=80",
+        },
+        {
+          id: 6,
+          name: "Travertine Linear Pillar Lamp",
+          category: "lighting",
+          price: 1450,
+          img: "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=400&q=80",
+        },
+      ];
+
+      let basket = [];
+
+      function generateStorefront(items) {
+        const grid = document.getElementById("storeGrid");
+        grid.innerHTML = items
+          .map(
+            (p) => `
+        <div class="product-card">
+          <button class="bag-action-btn" onclick="pushToCart(${p.id})">+</button>
+          <div class="img-box">
+            <img src="${p.img}" alt="${p.name}">
+          </div>
+          <div class="details-box">
+            <div>
+              <p class="cat-txt">${p.category}</p>
+              <h3 class="title-txt">${p.name}</h3>
+            </div>
+            <div class="price-txt">$${p.price.toLocaleString()}</div>
+          </div>
+        </div>
+      `,
+          )
+          .join("");
+      }
+
+      function filterCategory(cat, element) {
+        document
+          .querySelectorAll(".nav-categories li")
+          .forEach((el) => el.classList.remove("active-tab"));
+        element.classList.add("active-tab");
+
+        if (cat === "all") {
+          generateStorefront(PRODUCTS);
+        } else {
+          const filtered = PRODUCTS.filter((p) => p.category === cat);
+          generateStorefront(filtered);
+        }
+      }
+
+      function pushToCart(id) {
+        const match = PRODUCTS.find((p) => p.id === id);
+        basket.push(match);
+        syncCartUI();
+
+        const toast = document.getElementById("toast");
+        toast.innerText = `Added "${match.name}" to Bag`;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
+      }
+
+      function syncCartUI() {
+        document.getElementById("cartCount").innerText = basket.length;
+        const listEl = document.getElementById("cartItemsList");
+        const totalEl = document.getElementById("cartTotal");
+
+        listEl.innerHTML = basket
+          .map(
+            (item) => `
+        <li class="cart-item-node">
+          <span>${item.name}</span>
+          <span style="color:var(--accent-orange)">$${item.price.toLocaleString()}</span>
+        </li>
+      `,
+          )
+          .join("");
+
+        const costsum = basket.reduce((sum, item) => sum + item.price, 0);
+        totalEl.innerText = `$${costsum.toLocaleString()}`;
+      }
+
+      function toggleCart(open) {
+        const drawer = document.getElementById("cartDrawer");
+        if (open) drawer.classList.add("open");
+        else drawer.classList.remove("open");
+      }
+
+      function processCheckout() {
+        if (basket.length === 0) {
+          alert("Your collection container is empty.");
+          return;
+        }
+        alert(
+          "Secure Stripe routing initialized. Transaction completed successfully.",
+        );
+        basket = [];
+        syncCartUI();
+        toggleCart(false);
+      }
+
+      // Initialize layout
+      generateStorefront(PRODUCTS);
+    </script>
+  </body>
+</html>
